@@ -12,4 +12,10 @@ recognitions_label: Recognitions
   The name, affiliation and email above it come from _config.yml.
 -->
 
-Lorem ipsum dolor sit amet, consectetuer [placeholder link](https://example.com) elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+I study astrophysics and information + data science at Caltech. I'm interested in compact objects (white dwarfs, neutron stars), astrophysical fluid dynamics, and complex self-interacting systems. 
+
+I currently work with [Jim Fuller's group](https://jimfuller.caltech.edu/) using analytic tools and computational fluid dynamics to model white dwarf physics, and [Andreas Faisst's group](https://sites.astro.caltech.edu/~afaisst/researchgroup.htm) where I work with Bayesian models and analyze galaxy morphology. I've previously worked with the [Planetary Modeling Group](https://planets.stanford.edu/people) at Stanford, where I modeled water world atmospheres.
+
+I'm also science lead at [Caltech Air and Outer Space](https://caos.caltech.edu/), where we're currently building a multispectral imager. Previously, we've presented some of our work at [NASA HQ](https://www.eas.caltech.edu/news/finalist-in-nasa-space-to-soil-challenge).
+
+Outside research, I also like to study history, linguistics, various niches of applied math, and anthropology. I like to climb, and write sci-fi occasionally.
