@@ -1,8 +1,8 @@
 # External profiles, defined once and referred to by key elsewhere
 # (the homepage diagram in _data/moc.yml and the pubs page header).
-linkedin: https://www.linkedin.com/in/username/
-scholar:  https://scholar.google.com/citations?user=XXXXXXXXXXXX
-orcid:    https://orcid.org/0000-0000-0000-0000
-ads:      https://ui.adsabs.harvard.edu/search/q=author%3A%22Lastname%2C%20F.%22
-arxiv:    https://arxiv.org/a/lastname_f_1
-github:   https://github.com/username
+linkedin: https://www.linkedin.com/in/marcus-n-king
+scholar:  https://scholar.google.com/citations?user=4jNaPqUAAAAJ&hl=en
+orcid:    https://orcid.org/0009-0006-2888-7995
+# ads:      https://ui.adsabs.harvard.edu/search/q=author%3A%22Lastname%2C%20F.%22
+# arxiv:    https://arxiv.org/a/lastname_f_1
+# github:   https://github.com/username
