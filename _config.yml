@@ -10,7 +10,7 @@ lang: en
 
 # If the repository is named <username>.github.io, keep baseurl empty.
 # For any other repository name (e.g. "website"), use baseurl: "/website".
-url: "https://username.github.io"
+url: "https://marcusnking.github.io"
 baseurl: ""
 
 author:
