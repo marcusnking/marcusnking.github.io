@@ -1,0 +1,10 @@
+<header class="masthead">
+  <div class="column masthead__inner">
+    <a class="masthead__name" href="{{ '/' | relative_url }}">{{ site.author.name }}</a>
+    <nav class="masthead__nav" aria-label="Primary">
+      {%- for item in site.data.nav %}
+      <a class="bracket{% if page.url == item.url %} is-current{% endif %}" href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.label }}</a>
+      {%- endfor %}
+    </nav>
+  </div>
+</header>

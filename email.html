@@ -1,0 +1,6 @@
+{%- assign email_parts = site.author.email | split: "@" -%}
+<span class="email" data-user="{{ email_parts[0] }}" data-domain="{{ email_parts[1] }}">
+  <span class="email__text" aria-live="polite">{{ site.author.email | replace: "@", " [at] " | replace: ".", " [dot] " }}</span><button class="email__copy js-only" type="button" aria-label="Copy email address" title="Copy email address">
+    <svg viewBox="0 0 9 9" aria-hidden="true"><rect x="0.375" y="0.375" width="6.03" height="6.03"/><rect class="front" x="2.555" y="2.555" width="6.03" height="6.03"/></svg>
+  </button>
+</span>

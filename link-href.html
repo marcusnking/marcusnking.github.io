@@ -1,0 +1,11 @@
+{%- comment -%}
+  Resolves a link target into `link_href` and sets `link_external`.
+  Accepts a key from _data/links.yml, a site path ("/cv/") or a full URL.
+{%- endcomment -%}
+{%- assign link_href = site.data.links[include.target] | default: include.target -%}
+{%- if link_href contains "://" or link_href contains "mailto:" -%}
+  {%- assign link_external = true -%}
+{%- else -%}
+  {%- assign link_external = false -%}
+  {%- assign link_href = link_href | relative_url -%}
+{%- endif -%}

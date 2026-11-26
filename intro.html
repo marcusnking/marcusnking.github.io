@@ -1,0 +1,16 @@
+{%- comment -%}
+  Title block shared by every page: large serif title, hairline rule,
+  one row of mono metadata. Parameters:
+    title  - the large heading
+    left   - text for the left of the metadata row
+    right  - HTML for the right of the metadata row (optional)
+{%- endcomment -%}
+<section class="intro column">
+  <h1 class="intro__title">{{ include.title }}</h1>
+  <div class="intro__meta">
+    <p class="meta">{{ include.left }}</p>
+    {%- if include.right %}
+    <div class="meta meta--end">{{ include.right }}</div>
+    {%- endif %}
+  </div>
+</section>

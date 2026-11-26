@@ -1,0 +1,6 @@
+{%- if site.footer -%}
+<footer class="colophon column">
+  <span>&copy; {{ site.time | date: "%Y" }} {{ site.author.name }}</span>
+  <span>updated {{ site.time | date: "%B %Y" }}</span>
+</footer>
+{%- endif -%}

@@ -1,0 +1,54 @@
+{%- comment -%}
+  Homepage diagram. Geometry and links come from _data/moc.yml.
+
+  How it is drawn, without any JavaScript:
+  - The disk is drawn as unit circles and unit spokes inside a group
+    transformed by  rotate(-PA) scale(R, R*q), which squashes the circle
+    into the inclined ellipse.
+  - A marker at (r, angle) is placed with
+        DISK  rotate(-angle) translate(r 0) rotate(angle)  DISK^-1
+    which reduces to a plain translation, so the marker itself (beam,
+    diamond, label) stays upright and undistorted.
+{%- endcomment -%}
+{%- assign disk = site.data.moc.disk -%}
+{%- assign d_rq = disk.radius | times: disk.axis_ratio -%}
+{%- assign d_inv_r = 1.0 | divided_by: disk.radius -%}
+{%- assign d_inv_rq = 1.0 | divided_by: d_rq -%}
+{%- assign d_pa_neg = disk.position_angle | times: -1 -%}
+{%- capture d_fwd %}rotate({{ d_pa_neg }}) scale({{ disk.radius }} {{ d_rq }}){% endcapture -%}
+{%- capture d_inv %}scale({{ d_inv_r }} {{ d_inv_rq }}) rotate({{ disk.position_angle }}){% endcapture -%}
+<svg class="moc" viewBox="-300 -122 600 248" role="group" aria-label="Map of content">
+  <defs>
+    <linearGradient id="moc-beam" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="currentColor"/>
+      <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g class="moc__disk" transform="{{ d_fwd }}" aria-hidden="true">
+    {%- for k in (1..disk.rings) %}
+    <circle r="{{ k | times: 1.0 | divided_by: disk.rings }}"/>
+    {%- endfor %}
+    {%- for k in (1..disk.spokes) %}
+    {%- assign spoke_angle = k | minus: 1 | times: 360.0 | divided_by: disk.spokes | plus: disk.spoke_offset | times: -1 %}
+    <line x2="1" transform="rotate({{ spoke_angle }})"/>
+    {%- endfor %}
+  </g>
+  {%- for node in site.data.moc.nodes %}
+  {%- include link-href.html target=node.href %}
+  {%- assign node_angle_neg = node.angle | times: -1 %}
+  {%- if node.primary %}
+    {%- assign beam_h = node.beam | default: 77.37 %}{% assign beam_w = 7.18 %}{% assign dia = 5.07 %}{% assign label_y = 13.66 %}
+  {%- else %}
+    {%- assign beam_h = node.beam | default: 45.67 %}{% assign beam_w = 4.89 %}{% assign dia = 3.46 %}{% assign label_y = 11.99 %}
+  {%- endif %}
+  {%- assign half_w = beam_w | divided_by: 2.0 %}{% assign half_d = dia | divided_by: 2.0 %}
+  <a class="moc__node{% if node.primary %} is-primary{% endif %}{% if page.url == link_href %} is-current{% endif %}" href="{{ link_href }}"{% if link_external %} rel="me noopener"{% endif %}>
+    <g transform="{{ d_fwd }} rotate({{ node_angle_neg }}) translate({{ node.r }} 0) rotate({{ node.angle }}) {{ d_inv }}">
+      <rect class="moc__hit" x="-28" y="{{ beam_h | times: -1 }}" width="56" height="{{ beam_h | plus: label_y | plus: 6 }}"/>
+      <rect class="moc__beam" x="-{{ half_w }}" y="-{{ beam_h }}" width="{{ beam_w }}" height="{{ beam_h }}"/>
+      <rect class="moc__diamond" x="-{{ half_d }}" y="-{{ half_d }}" width="{{ dia }}" height="{{ dia }}" transform="rotate(45)"/>
+      <text class="moc__label" y="{{ label_y }}" text-anchor="middle">[{{ node.label }}]</text>
+    </g>
+  </a>
+  {%- endfor %}
+</svg>
