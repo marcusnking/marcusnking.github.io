@@ -1,0 +1,31 @@
+---
+layout: default
+---
+{%- capture email_html %}{% include email.html %}{% endcapture -%}
+{% include intro.html title=site.author.name left=site.author.affiliation right=email_html %}
+
+<section class="block block--about column" aria-labelledby="about-label">
+  <h2 class="label" id="about-label">{{ page.about_label | default: "About" }}</h2>
+  <div class="prose">
+{{ content }}
+  </div>
+</section>
+
+{%- if site.data.recognitions and site.data.recognitions.size > 0 %}
+<section class="block block--ledger column" aria-labelledby="recognitions-label">
+  <h2 class="label" id="recognitions-label">{{ page.recognitions_label | default: "Recognitions" }}</h2>
+  <ul class="ledger">
+    {%- for item in site.data.recognitions %}
+    <li class="ledger__row">
+      <span class="ledger__key">{% if item.url %}<a href="{{ item.url }}">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</span>
+      <span class="ledger__val">{{ item.detail }}</span>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
+{%- endif %}
+
+<section class="block block--moc column" aria-labelledby="moc-label">
+  <h2 class="label" id="moc-label">{{ site.moc_label | default: "MOC" }}</h2>
+  {% include moc.html %}
+</section>

@@ -1,0 +1,31 @@
+---
+layout: default
+---
+{%- assign cv_pdf = page.pdf | relative_url -%}
+{%- capture cv_left %}{% if page.updated %}updated {{ page.updated | date: "%B %Y" }}{% else %}{{ site.author.affiliation }}{% endif %}{% endcapture -%}
+{%- capture cv_right -%}
+  <a class="bracket" href="{{ cv_pdf }}" download>download</a>
+  <a class="bracket" href="{{ cv_pdf }}">open</a>
+{%- endcapture -%}
+{% include intro.html title=page.title left=cv_left right=cv_right %}
+
+{%- assign page_note = content | strip_html | strip -%}
+{%- if page_note != "" %}
+<section class="block block--note column">
+  <div class="prose">
+{{ content }}
+  </div>
+</section>
+{%- endif %}
+
+<section class="block block--doc column" aria-labelledby="doc-label">
+  <h2 class="label" id="doc-label">{{ page.document_label | default: "Document" }}</h2>
+  <div class="doc" data-pdf="{{ cv_pdf }}">
+    <div class="doc__pages"></div>
+    <object class="doc__frame" data="{{ cv_pdf }}" type="application/pdf" aria-label="Curriculum vitae (PDF)">
+      <p class="doc__fallback">This browser does not show PDFs inline. <a href="{{ cv_pdf }}">Open the CV</a> instead.</p>
+    </object>
+    <p class="doc__fallback doc__failed">The CV could not be displayed here. <a href="{{ cv_pdf }}">Open the PDF</a>.</p>
+  </div>
+</section>
+<script type="module" src="{{ '/assets/js/cv.js' | relative_url }}"></script>

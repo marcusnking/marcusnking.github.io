@@ -1,0 +1,71 @@
+---
+layout: default
+---
+{%- assign pubs = site.data.publications -%}
+{%- capture pubs_left %}{{ pubs | size }} entries, newest first{% endcapture -%}
+{%- capture pubs_right -%}
+  {%- for key in page.profiles -%}
+    {%- include link-href.html target=key -%}
+    <a class="bracket" href="{{ link_href }}"{% if link_external %} rel="me noopener"{% endif %}>{{ key }}</a>
+  {%- endfor -%}
+{%- endcapture -%}
+{% include intro.html title=page.title left=pubs_left right=pubs_right %}
+
+{%- assign page_note = content | strip_html | strip -%}
+{%- if page_note != "" %}
+<section class="block block--note column">
+  <div class="prose">
+{{ content }}
+  </div>
+</section>
+{%- endif %}
+
+{%- capture me_html %}<span class="me">{{ site.author.pub_name }}</span>{% endcapture -%}
+{%- assign groups = pubs | group_by: "year" | sort: "name" | reverse %}
+<div class="pubs column">
+  {%- for group in groups %}
+  <section class="block block--ledger pubs__year" aria-labelledby="year-{{ group.name | slugify }}">
+    <h2 class="label" id="year-{{ group.name | slugify }}">{{ group.name }}</h2>
+    <ol class="ledger">
+      {%- for pub in group.items %}
+      {%- assign pub_id = pub.id | default: pub.title | slugify | truncate: 60, "" %}
+      <li class="pub" id="{{ pub_id }}">
+        <div class="pub__main">
+          <p class="pub__title">{{ pub.title }}</p>
+          {%- if pub.authors %}
+          <p class="pub__authors">{% if site.author.pub_name %}{{ pub.authors | replace: site.author.pub_name, me_html }}{% else %}{{ pub.authors }}{% endif %}</p>
+          {%- endif %}
+          {%- if pub.note %}
+          <p class="pub__note">{{ pub.note | markdownify | remove: "<p>" | remove: "</p>" | strip }}</p>
+          {%- endif %}
+        </div>
+        <div class="pub__aside">
+          {%- if pub.venue %}<p class="pub__venue">{{ pub.venue }}</p>{% endif %}
+          {%- if pub.status %}<p class="pub__status">{{ pub.status }}</p>{% endif %}
+          {%- if pub.links or pub.bibtex %}
+          <p class="pub__links">
+            {%- for link in pub.links %}
+              {%- assign l_key = link[0] %}{% assign l_val = link[1] | append: "" %}
+              {%- if l_key == "doi" %}{% unless l_val contains "://" %}{% assign l_val = "https://doi.org/" | append: l_val %}{% endunless %}{% endif %}
+              {%- if l_key == "arxiv" %}{% unless l_val contains "://" %}{% assign l_val = "https://arxiv.org/abs/" | append: l_val %}{% endunless %}{% endif %}
+              {%- unless l_val contains "://" %}{% assign l_val = l_val | relative_url %}{% endunless %}
+            <a class="bracket" href="{{ l_val }}">{% if l_key == "arxiv" %}arXiv{% elsif l_key == "doi" %}DOI{% else %}{{ l_key }}{% endif %}</a>
+            {%- endfor %}
+            {%- if pub.bibtex %}
+            <button class="bracket js-only" type="button" aria-expanded="false" aria-controls="{{ pub_id }}-bib" data-bib-toggle>bib</button>
+            {%- endif %}
+          </p>
+          {%- endif %}
+        </div>
+        {%- if pub.bibtex %}
+        <div class="pub__bib" id="{{ pub_id }}-bib" hidden>
+          <pre>{{ pub.bibtex | strip | escape }}</pre>
+          <button class="bracket" type="button" data-bib-copy>copy</button>
+        </div>
+        {%- endif %}
+      </li>
+      {%- endfor %}
+    </ol>
+  </section>
+  {%- endfor %}
+</div>
