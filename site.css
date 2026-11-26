@@ -1,0 +1,512 @@
+/* =====================================================================
+   Personal site stylesheet
+
+   Every measurement here comes from the 1366 x 768 design artboard and
+   is written as  calc(N * var(--u)),  where N is artboard pixels. So:
+     --scale: 1    reproduces the artboard exactly
+     --scale: 1.3  is the same layout 30% larger (the default)
+   To restyle, edit the variables in :root first.
+   ===================================================================== */
+
+/* ---------- Fonts (self-hosted, SIL Open Font License) ---------- */
+
+@font-face {
+  font-family: "Cormorant";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../fonts/cormorant-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Cormorant";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../fonts/cormorant-latin-ext-wght-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Cormorant";
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../fonts/cormorant-latin-wght-italic.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Cormorant";
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../fonts/cormorant-latin-ext-wght-italic.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url("../fonts/jetbrains-mono-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url("../fonts/jetbrains-mono-latin-ext-wght-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ---------- Design tokens ---------- */
+
+:root {
+  /* Colour: warm paper, oxblood ink, one terracotta accent for links. */
+  --paper: #fffdfb;
+  --ink: #430e00;
+  --ink-75: rgb(67 14 0 / 0.75);
+  --ink-50: rgb(67 14 0 / 0.5);
+  --ink-35: rgb(67 14 0 / 0.35);
+  --accent: #ca5040;
+
+  /* Type */
+  --serif: "Cormorant", "Cormorant Garamond", Garamond, "Times New Roman", serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --mono-thin: 200;
+  --mono-light: 300;
+  --mono-medium: 500;
+  --serif-light: 300;
+  --serif-medium: 500;
+
+  /* Scale: 1 artboard pixel = var(--u) on screen. */
+  --scale: 1.3;
+  --u: calc(var(--scale) * 1px);
+
+  /* Measure */
+  --column: 401;     /* text column, artboard px */
+  --wide: 600;       /* diagram / CV frame, wider than the column */
+  --gutter: 20px;    /* minimum side margin on narrow screens */
+  --hair: 0.5px;     /* rules */
+}
+
+/* Hairline rules. Borders thinner than 1px get rounded up by browsers,
+   so rules are 1px pseudo-elements scaled to var(--hair-scale). */
+:root { --hair-scale: 0.5; }
+.masthead::after,
+.intro__title::after,
+.ledger::before,
+.ledger::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--rule-color, var(--ink-50));
+  transform: scaleY(var(--hair-scale));
+  pointer-events: none;
+}
+.masthead::after,
+.intro__title::after,
+.ledger::after { bottom: 0; transform-origin: bottom; }
+.ledger::before { top: 0; transform-origin: top; }
+
+@media (max-width: 680px) {
+  :root { --scale: 1.36; }
+}
+
+/* ---------- Base ---------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: var(--serif-light);
+  font-size: calc(12 * var(--u));
+  line-height: calc(14.4 * var(--u));
+  font-kerning: normal;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, p, ul, ol, pre { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+img, svg { display: block; max-width: 100%; }
+
+::selection { background: rgb(202 80 64 / 0.18); }
+
+a { color: inherit; text-decoration: none; }
+
+:focus-visible {
+  outline: 1px dotted var(--accent);
+  outline-offset: 2px;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.no-js .js-only { display: none !important; }
+
+.column {
+  width: min(calc(var(--column) * var(--u)), 100% - 2 * var(--gutter));
+  margin-inline: auto;
+}
+
+/* ---------- Shared text styles ---------- */
+
+/* Small uppercase section label: ABOUT, RECOGNITIONS, MOC ... */
+.label {
+  font-family: var(--mono);
+  font-weight: var(--mono-light);
+  font-size: calc(7 * var(--u));
+  line-height: calc(10 * var(--u));
+  text-transform: uppercase;
+  color: var(--ink-50);
+}
+
+/* Mono metadata line: affiliation, email, dates */
+.meta {
+  font-family: var(--mono);
+  font-weight: var(--mono-light);
+  font-size: calc(9 * var(--u));
+  line-height: calc(14 * var(--u));
+  color: var(--ink-75);
+}
+
+/* Bracketed mono links: [home] [pubs] [cv] [arXiv] ... */
+.bracket {
+  font-family: var(--mono);
+  font-weight: var(--mono-light);
+  font-size: calc(9 * var(--u));
+  color: var(--ink-75);
+  white-space: nowrap;
+}
+.bracket::before { content: "["; }
+.bracket::after { content: "]"; }
+.bracket:hover { color: var(--accent); }
+.bracket.is-current { color: var(--ink); font-weight: var(--mono-medium); }
+
+/* Inline links in running text: the accent colour, underlined */
+.prose a,
+.ledger__key a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: max(0.5px, 0.045em);
+  text-underline-offset: 0.16em;
+}
+.prose a:hover,
+.ledger__key a:hover { color: var(--ink); }
+
+.prose p + p,
+.prose p + ul,
+.prose ul + p { margin-top: calc(7.2 * var(--u)); }
+.prose em { font-style: italic; }
+.prose strong { font-weight: var(--serif-medium); }
+
+/* ---------- Masthead ---------- */
+
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: calc(64.71 * var(--u));
+  background: var(--paper);
+}
+
+.masthead__inner {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: calc(16 * var(--u));
+  padding-top: calc(25.65 * var(--u));
+}
+
+.masthead__name {
+  font-size: calc(14 * var(--u));
+  line-height: calc(14 * var(--u));
+  white-space: nowrap;
+}
+
+.masthead__nav {
+  display: flex;
+  gap: calc(15.04 * var(--u));
+}
+
+/* ---------- Page title block ---------- */
+
+main { padding-top: calc(35.69 * var(--u)); }
+
+.intro__title {
+  font-weight: var(--serif-medium);
+  font-size: calc(36 * var(--u));
+  line-height: calc(40 * var(--u));
+  position: relative;
+  padding-bottom: calc(5.61 * var(--u) + var(--hair));
+  --rule-color: var(--ink);
+}
+
+.intro__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  column-gap: calc(24 * var(--u));
+  margin-top: calc(8.79 * var(--u));
+}
+
+.meta--end {
+  display: flex;
+  gap: calc(15.04 * var(--u));
+  text-align: right;
+}
+
+/* Obfuscated email with copy button */
+.email { white-space: nowrap; }
+.email__copy {
+  display: inline-block;
+  width: calc(8.96 * var(--u));
+  height: calc(8.96 * var(--u));
+  margin-left: calc(12.4 * var(--u));
+  vertical-align: calc(-1.2 * var(--u));
+  opacity: 0.5;
+}
+.email__copy svg { width: 100%; height: 100%; overflow: visible; }
+.email__copy rect {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: calc(0.75 * var(--u));
+  vector-effect: non-scaling-stroke;
+}
+.email__copy rect.front { fill: var(--paper); }
+.email__copy:hover { opacity: 1; }
+.email__copy:hover rect { stroke: var(--accent); }
+.email.is-copied .email__text { color: var(--accent); }
+
+/* ---------- Sections ---------- */
+
+.block { margin-top: calc(22.46 * var(--u)); }
+.intro + .block { margin-top: calc(15.39 * var(--u)); }
+
+.block > .label + .prose { margin-top: calc(1.73 * var(--u)); }
+
+/* Ledger: rule, rows of serif key + mono value, rule (RECOGNITIONS) */
+.ledger {
+  margin-top: calc(5.45 * var(--u));
+  position: relative;
+  padding: calc(3.47 * var(--u) + var(--hair)) 0 calc(4.5 * var(--u) + var(--hair));
+}
+
+.ledger__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  column-gap: calc(24 * var(--u));
+  padding: calc(3.42 * var(--u)) 0;
+}
+
+.ledger__val {
+  position: relative;
+  top: calc(1.44 * var(--u));
+  font-family: var(--mono);
+  font-weight: var(--mono-thin);
+  font-size: calc(9 * var(--u));
+  line-height: calc(10 * var(--u));
+  color: var(--ink-75);
+  text-align: right;
+}
+
+/* ---------- Homepage diagram ---------- */
+
+.block--moc { margin-top: calc(19.31 * var(--u)); }
+
+.moc {
+  width: min(calc(var(--wide) * var(--u)), 100vw);
+  max-width: none;
+  margin-top: calc(5.64 * var(--u));
+  margin-left: 50%;
+  transform: translateX(-50%);
+  overflow: visible;
+  color: var(--ink);
+}
+
+.moc__disk {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: calc(0.5 * var(--u));
+  vector-effect: non-scaling-stroke;
+  opacity: 0.15;
+}
+.moc__disk * { vector-effect: non-scaling-stroke; }
+
+.moc__node { color: var(--ink); }
+.moc__hit { fill: transparent; }
+.moc__beam { fill: url(#moc-beam); opacity: 0.3; }
+.moc__diamond { fill: currentColor; }
+.moc__label {
+  fill: currentColor;
+  font-family: var(--mono);
+  font-weight: var(--mono-thin);
+  font-size: 7.26px;
+}
+.moc__node.is-primary .moc__label { font-weight: var(--mono-medium); }
+
+.moc__node:hover,
+.moc__node:focus-visible { color: var(--accent); outline: none; }
+.moc__node:hover .moc__beam,
+.moc__node:focus-visible .moc__beam { opacity: 0.6; }
+.moc__node:focus-visible .moc__label { text-decoration: underline; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .moc__beam, .moc__diamond, .moc__label, .bracket, .email__copy {
+    transition: opacity 0.25s ease, color 0.25s ease, fill 0.25s ease;
+  }
+}
+
+/* ---------- Publications ---------- */
+
+.pubs__year:not(:last-child) .ledger { padding-bottom: 0; }
+.pubs__year:not(:last-child) .ledger::after { display: none; }
+
+.pub {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) calc(150 * var(--u));
+  column-gap: calc(24 * var(--u));
+  padding: calc(6 * var(--u)) 0;
+}
+
+.pub__title { font-weight: var(--serif-medium); }
+.pub__authors .me { font-weight: var(--serif-medium); }
+.pub__note { font-style: italic; color: var(--ink-75); }
+.pub__note a { color: var(--accent); text-decoration: underline; text-decoration-thickness: max(0.5px, 0.045em); text-underline-offset: 0.16em; }
+
+.pub__aside {
+  position: relative;
+  top: calc(1.44 * var(--u));
+  text-align: right;
+  font-family: var(--mono);
+  font-size: calc(9 * var(--u));
+  line-height: calc(14.4 * var(--u));
+}
+.pub__venue { font-weight: var(--mono-thin); color: var(--ink-75); }
+.pub__status {
+  font-weight: var(--mono-light);
+  font-size: calc(7 * var(--u));
+  text-transform: uppercase;
+  color: var(--ink-50);
+}
+.pub__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  column-gap: calc(9 * var(--u));
+}
+
+.pub__bib {
+  grid-column: 1 / -1;
+  margin-top: calc(7.2 * var(--u));
+  padding: calc(2 * var(--u)) 0 calc(2 * var(--u)) calc(12 * var(--u));
+  box-shadow: inset 1px 0 0 var(--ink-35);
+}
+.pub__bib pre {
+  font-family: var(--mono);
+  font-weight: var(--mono-light);
+  font-size: calc(7.5 * var(--u));
+  line-height: calc(11.5 * var(--u));
+  color: var(--ink-75);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.pub__bib .bracket { margin-top: calc(5 * var(--u)); }
+.pub__bib[hidden] { display: none; }
+
+/* ---------- CV document ---------- */
+
+.doc {
+  width: min(calc(var(--wide) * var(--u)), 100vw - 2 * var(--gutter));
+  margin-top: calc(6.16 * var(--u));
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+.doc__frame {
+  display: block;
+  width: 100%;
+  aspect-ratio: 8.5 / 11;
+  border: 1px solid var(--ink-35);
+}
+.js .doc__frame { display: none; }
+
+.doc__pages { display: grid; gap: calc(12 * var(--u)); }
+.doc__sheet { display: block; }
+.doc__page {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgb(67 14 0 / 0.14);
+}
+/* Reserve roughly one page of height while the PDF loads. */
+.js .doc:not(.is-rendered):not(.is-failed) .doc__pages { min-height: calc(var(--wide) * var(--u) * 11 / 8.5); }
+
+.doc__fallback { padding: calc(12 * var(--u)) 0; }
+.doc__fallback a { color: var(--accent); text-decoration: underline; text-underline-offset: 0.16em; }
+.doc__failed { display: none; }
+.doc.is-failed .doc__failed { display: block; }
+
+/* ---------- Footer ---------- */
+
+.colophon {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: calc(12 * var(--u));
+  margin-top: calc(40 * var(--u));
+  padding-bottom: calc(28 * var(--u));
+  font-family: var(--mono);
+  font-weight: var(--mono-light);
+  font-size: calc(7 * var(--u));
+  line-height: calc(10 * var(--u));
+  text-transform: uppercase;
+  color: var(--ink-50);
+}
+
+/* ---------- Narrow screens ---------- */
+
+@media (max-width: 680px) {
+  .ledger__row,
+  .pub { grid-template-columns: minmax(0, 1fr); }
+
+  .ledger__val,
+  .pub__aside { top: 0; text-align: left; }
+  .ledger__val { margin-bottom: calc(2 * var(--u)); }
+  .pub__aside { margin-top: calc(2 * var(--u)); }
+  .pub__links { justify-content: flex-start; }
+
+  .meta--end { text-align: left; }
+
+  /* Labels in the diagram scale with it, so enlarge them on phones. */
+  .moc__label { font-size: 12.5px; transform: translateY(3px); }
+}
+
+/* ---------- Print ---------- */
+
+@media print {
+  :root { --scale: 1; }
+  .masthead { position: static; }
+  .masthead__nav, .email__copy, .pub__bib, [data-bib-toggle], .block--doc { display: none !important; }
+  .prose a, .ledger__key a { color: inherit; }
+}
