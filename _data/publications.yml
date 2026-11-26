@@ -20,60 +20,60 @@
 #    bibtex    optional; adds a [bib] toggle with a copy button
 # =====================================================================
 
-- title: Placeholder title for a manuscript in preparation
-  authors: F. Lastname, A. Collaborator, B. Advisor
+- title: Morphology of Eight Massive z ≈ 1 Galaxies with JWST MIRI/MRS
+  authors: Marcus N. King, Andreas F., et al.
   year: in prep
 
-- title: Placeholder title for a submitted first-author article
-  authors: F. Lastname, A. Collaborator, B. Advisor
-  venue: Submitted to Journal Name
-  year: submitted
-  links:
-    arxiv: "2611.00000"
+#- title: Placeholder title for a submitted first-author article
+#  authors: F. Lastname, A. Collaborator, B. Advisor
+#  venue: Submitted to Journal Name
+#  year: submitted
+#  links:
+#    arxiv: "2611.00000"
 
-- title: Placeholder title for a refereed first-author article with a somewhat longer title that wraps onto a second line
-  authors: F. Lastname, A. Collaborator, C. Colleague, B. Advisor
-  venue: Journal Name, 999, 123
+- title: Accretion Rates and Thermohaline Convection in Polluted White Dwarfs
+  authors: J. R. Fuentes, Matias Castro-Tapia, Jim Fuller, and Marcus N. King
+  venue: The Astrophysical Journal Letters, 1011, 2
   year: 2026
   links:
-    ads: https://ui.adsabs.harvard.edu/
-    arxiv: "2601.00000"
-    doi: 10.0000/placeholder.0001
-    code: https://github.com/username/repository
-  bibtex: |
-    @article{Lastname2026,
-      author  = {{Lastname}, F. and {Collaborator}, A. and {Colleague}, C. and {Advisor}, B.},
-      title   = {Placeholder title for a refereed first-author article},
-      journal = {Journal Name},
-      year    = 2026,
-      volume  = 999,
-      pages   = {123},
-      doi     = {10.0000/placeholder.0001}
-    }
+    scix: https://scixplorer.org/abs/2026ApJ..1011L..38F/abstract
+    arxiv: "2608.31110"
+    doi: 10.3847/2041-8213/aeb6b1 
+    # code: https://github.com/username/repository
+  # bibtex: |
+    #@article{Lastname2026,
+    #  author  = {{Lastname}, F. and {Collaborator}, A. and {Colleague}, C. and {Advisor}, B.},
+    #  title   = {Placeholder title for a refereed first-author article},
+    #  journal = {Journal Name},
+    #  year    = 2026,
+    #  volume  = 999,
+    #  pages   = {123},
+    #  doi     = {10.0000/placeholder.0001}
+   # }
 
-- title: Placeholder title for a co-authored article
-  authors: A. Collaborator, F. Lastname, B. Advisor
-  venue: Journal Name, 998, 45
-  year: 2026
-  status: invited review
-  note: Placeholder remark, e.g. *featured in a research highlight*.
-  links:
-    ads: https://ui.adsabs.harvard.edu/
-    arxiv: "2602.00000"
+#- title: Placeholder title for a co-authored article
+#  authors: A. Collaborator, F. Lastname, B. Advisor
+#  venue: Journal Name, 998, 45
+#  year: 2026
+#  status: invited review
+#  note: Placeholder remark, e.g. *featured in a research highlight*.
+#  links:
+#    ads: https://ui.adsabs.harvard.edu/
+#    arxiv: "2602.00000"
 
-- title: Placeholder title for a conference proceeding
-  authors: F. Lastname, B. Advisor
-  venue: Proceedings of a Conference, 12, 34
-  year: 2025
-  links:
-    ads: https://ui.adsabs.harvard.edu/
-    # pdf: /assets/pubs/lastname2025.pdf   (put the file in assets/pubs/)
-  bibtex: |
-    @inproceedings{Lastname2025,
-      author    = {{Lastname}, F. and {Advisor}, B.},
-      title     = {Placeholder title for a conference proceeding},
-      booktitle = {Proceedings of a Conference},
-      year      = 2025,
-      volume    = 12,
-      pages     = {34}
-    }
+#- title: Placeholder title for a conference proceeding
+#  authors: F. Lastname, B. Advisor
+#  venue: Proceedings of a Conference, 12, 34
+#  year: 2025
+#  links:
+#    ads: https://ui.adsabs.harvard.edu/
+#    # pdf: /assets/pubs/lastname2025.pdf   (put the file in assets/pubs/)
+#  bibtex: |
+#    @inproceedings{Lastname2025,
+#      author    = {{Lastname}, F. and {Advisor}, B.},
+#      title     = {Placeholder title for a conference proceeding},
+#      booktitle = {Proceedings of a Conference},
+#      year      = 2025,
+#      volume    = 12,
+#      pages     = {34}
+#    }
