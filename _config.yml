@@ -1,0 +1,40 @@
+# =====================================================================
+#  SITE SETTINGS
+#  Most of what appears on the site is edited here and in _data/.
+#  Restart `jekyll serve` after editing this file (data files reload live).
+# =====================================================================
+
+title: Firstname Lastname
+description: "Personal website of Firstname Lastname: research, publications and CV."
+lang: en
+
+# If the repository is named <username>.github.io, keep baseurl empty.
+# For any other repository name (e.g. "website"), use baseurl: "/website".
+url: "https://username.github.io"
+baseurl: ""
+
+author:
+  name: Firstname Lastname
+  affiliation: Major @ University
+  email: lastname@uni.edu        # shown as "lastname [at] uni [dot] edu"
+  # Your name exactly as it appears in author lists. Every occurrence
+  # in _data/publications.yml is set in a heavier weight.
+  pub_name: F. Lastname
+
+# Small uppercase label above the diagram on the homepage.
+moc_label: MOC
+
+# Footer line. Set `footer: false` to remove the footer entirely.
+footer: true
+
+# ---------------------------------------------------------------------
+#  Build settings (GitHub Pages defaults; no need to change)
+# ---------------------------------------------------------------------
+markdown: kramdown
+permalink: pretty
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .jekyll-cache
