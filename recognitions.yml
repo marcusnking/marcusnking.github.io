@@ -1,0 +1,12 @@
+# Homepage "RECOGNITIONS" ledger, top to bottom.
+#   title:  left column (serif)
+#   detail: right column (mono)
+#   url:    optional; makes the title a link
+- title: "Recog #1"
+  detail: Information about Recognition
+- title: "Recog #2"
+  detail: Information about Recognition
+- title: "Recog #3"
+  detail: Information about Recognition
+- title: "Recog #4"
+  detail: Information about Recognition

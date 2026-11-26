@@ -1,0 +1,79 @@
+# =====================================================================
+#  PUBLICATIONS
+#  One entry per publication. Grouped by `year` on the pubs page, newest
+#  first. Non-numeric years ("submitted", "in prep") are listed above all
+#  numbered years, in reverse alphabetical order (so "submitted" comes
+#  before "in prep").
+#
+#  Fields (only `title` and `year` are required):
+#    title     publication title
+#    authors   author list as you want it shown; your name (author.pub_name
+#              in _config.yml) is emphasised automatically
+#    venue     journal / proceedings, volume, page; shown in mono
+#    status    optional small tag, e.g. "submitted", "in review"
+#    note      optional one-line remark (Markdown allowed)
+#    links     any of: ads, arxiv, doi, pdf, code, data, or any other key;
+#              each becomes a [key] link. Values are full URLs, except
+#              `doi` (bare DOI) and `arxiv` (bare arXiv id, in quotes so
+#              YAML keeps it as text: "2601.01234"), which are expanded
+#              automatically.
+#    bibtex    optional; adds a [bib] toggle with a copy button
+# =====================================================================
+
+- title: Placeholder title for a manuscript in preparation
+  authors: F. Lastname, A. Collaborator, B. Advisor
+  year: in prep
+
+- title: Placeholder title for a submitted first-author article
+  authors: F. Lastname, A. Collaborator, B. Advisor
+  venue: Submitted to Journal Name
+  year: submitted
+  links:
+    arxiv: "2611.00000"
+
+- title: Placeholder title for a refereed first-author article with a somewhat longer title that wraps onto a second line
+  authors: F. Lastname, A. Collaborator, C. Colleague, B. Advisor
+  venue: Journal Name, 999, 123
+  year: 2026
+  links:
+    ads: https://ui.adsabs.harvard.edu/
+    arxiv: "2601.00000"
+    doi: 10.0000/placeholder.0001
+    code: https://github.com/username/repository
+  bibtex: |
+    @article{Lastname2026,
+      author  = {{Lastname}, F. and {Collaborator}, A. and {Colleague}, C. and {Advisor}, B.},
+      title   = {Placeholder title for a refereed first-author article},
+      journal = {Journal Name},
+      year    = 2026,
+      volume  = 999,
+      pages   = {123},
+      doi     = {10.0000/placeholder.0001}
+    }
+
+- title: Placeholder title for a co-authored article
+  authors: A. Collaborator, F. Lastname, B. Advisor
+  venue: Journal Name, 998, 45
+  year: 2026
+  status: invited review
+  note: Placeholder remark, e.g. *featured in a research highlight*.
+  links:
+    ads: https://ui.adsabs.harvard.edu/
+    arxiv: "2602.00000"
+
+- title: Placeholder title for a conference proceeding
+  authors: F. Lastname, B. Advisor
+  venue: Proceedings of a Conference, 12, 34
+  year: 2025
+  links:
+    ads: https://ui.adsabs.harvard.edu/
+    # pdf: /assets/pubs/lastname2025.pdf   (put the file in assets/pubs/)
+  bibtex: |
+    @inproceedings{Lastname2025,
+      author    = {{Lastname}, F. and {Advisor}, B.},
+      title     = {Placeholder title for a conference proceeding},
+      booktitle = {Proceedings of a Conference},
+      year      = 2025,
+      volume    = 12,
+      pages     = {34}
+    }

@@ -1,0 +1,7 @@
+# Header navigation, left to right. `url` is a path on this site.
+- label: home
+  url: /
+- label: pubs
+  url: /pubs/
+- label: cv
+  url: /cv/

@@ -1,0 +1,51 @@
+# =====================================================================
+#  Homepage diagram ("map of content")
+#
+#  The diagram is a flat disk seen at an angle, like an inclined galaxy.
+#  Each link is a marker standing on the disk, placed in polar
+#  coordinates on the disk itself:
+#     r     = 0 (centre) ... 1 (outer ring)
+#     angle = degrees, counter-clockwise, measured in the disk plane
+#             from the major axis (0 = right-hand end of the long axis)
+#  Rings sit at r = 1/6, 2/6, ... so markers look best on those values.
+#  All lengths are in artboard pixels (the page scales them together).
+# =====================================================================
+
+disk:
+  radius: 293.2           # semi-major axis
+  axis_ratio: 0.3527      # b/a; 1 = face-on, smaller = more inclined
+  position_angle: 7.64    # rotation of the major axis, degrees CCW
+  rings: 6
+  spokes: 5
+  spoke_offset: 30.08     # angle of the first spoke, degrees
+
+nodes:
+  # `href` is either a path on this site (starts with "/"), a key from
+  # _data/links.yml, or a full URL.
+  # `primary: true` gives the larger marker and taller beam (one node).
+  # `beam` overrides the beam height for a single node.
+  - label: home
+    href: /
+    r: 0
+    angle: 0
+    primary: true
+  - label: cv
+    href: /cv/
+    r: 0.5
+    angle: 146.5
+  - label: in
+    href: linkedin
+    r: 0.3333
+    angle: 68.4
+  - label: pubs
+    href: /pubs/
+    r: 0.6667
+    angle: 64.5
+  - label: orcid
+    href: orcid
+    r: 0.8333
+    angle: 305.8
+  - label: scholar
+    href: scholar
+    r: 1
+    angle: 262.6
